@@ -45,7 +45,7 @@ void insertAtHead(node* &head, int data) {
 	head = n;
 }
 
-void insertAtTail(node* &head, int data) { //it is similar to the push_back() functionality of vector
+void insertAtTail(node* &head, int data) {
 
 	if (head == NULL) {          //(head==null)signifies that the linked list is not created and in that case inserting at head or tail will have same significance
 		insertAtHead(head, data);
@@ -62,7 +62,10 @@ void insertAtTail(node* &head, int data) { //it is similar to the push_back() fu
 	temp->next = n;
 }
 
+//*************************************************************************************************************
+
 //Given a sorted List Mimic the Binary Search Operation to find a given key
+
 //If the key is present then Print "Found" otherwise Print "Not Found".
 
 //Link:-https://www.geeksforgeeks.org/binary-search-on-singly-linked-list/
