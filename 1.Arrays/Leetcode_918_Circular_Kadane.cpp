@@ -12,6 +12,15 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
+/*
+   The maximum subarray sum may lie in the circular part or in the non-circular part.
+
+   -> If the maximum sum subarray is present in the non-circular part then simple kadane algorithm will do the trick.
+
+   -> If the maximum subarray is present in circular part then the minimum subarray sum will definately be present in the non-circular part
+      Therefore the maximum can be obtained as (total_sum_of_the_array - min_sum_of_the_array).
+*/
+
 class Solution {
 public:
 	int maxSubarraySumCircular(vector<int>& nums) {
