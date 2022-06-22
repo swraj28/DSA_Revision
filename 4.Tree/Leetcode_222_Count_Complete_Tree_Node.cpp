@@ -31,6 +31,14 @@ struct TreeNode {
     A complete can be considerd as a tree that contains various subtrees that are perfect in nature.
 */
 
+// T.c:- (log(node))^2
+
+/*
+   Reason :-
+
+
+*/
+
 class Solution {
 public:
 	int countNodes(TreeNode* root) {
