@@ -28,19 +28,19 @@ public:
 
 	int ans = 0;
 
-	pair<int, int> dfs(TreeNode* root) {
+	int dfs(TreeNode* root) {
 		if (root == nullptr) {
-			return { 0, 0};
+			return 0;
 		}
 
 		auto l = dfs(root->left);
 		auto r = dfs(root->right);
 
-		int temp_ans = max(l.ff, l.ss) + max(r.ff, r.ss);
+		int temp_ans = l + r;
 
 		ans = max(ans, temp_ans);
 
-		return {max(l.ff, l.ss) + 1, max(r.ff, r.ss) + 1};
+		return max(l, r) + 1;
 	}
 
 	int diameterOfBinaryTree(TreeNode* root) {

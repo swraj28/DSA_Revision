@@ -23,36 +23,27 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+
 class Solution {
 public:
 
-	int ans = INT_MIN;
-
-	int dfs(TreeNode* root) {
+	pair<int, pair<int, int>> dfs(TreeNode* root) {
 		if (root == nullptr) {
-			return 0;
+			return { -1, { -1, -1}};
 		}
 
 		auto l = dfs(root->left);
 		auto r = dfs(root->right);
 
-		int x = max(l, 0);
-		int y = max(r, 0);
+		int temp_ans = max({(l.ss.ss) + 1, (r.ss.ff) + 1});
 
-		int temp_ans = (x + y) + (root->val);
+		temp_ans = max({l.ff, r.ff, temp_ans});
 
-		ans = max(ans, temp_ans);
-
-		x += (root->val);
-		y += (root->val);
-
-		return max(x, y);
+		return {temp_ans, {(l.ss.ss) + 1, (r.ss.ff) + 1}};
 	}
 
-	int maxPathSum(TreeNode* root) {
+	int longestZigZag(TreeNode* root) {
 
-		auto x = dfs(root);
-
-		return ans;
+		return dfs(root).ff;
 	}
 };

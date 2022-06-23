@@ -12,7 +12,7 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-//Definition for a binary tree Node.
+//Definition for a binary tree node.
 
 struct TreeNode {
 	int val;
@@ -26,33 +26,30 @@ struct TreeNode {
 class Solution {
 public:
 
-	int ans = INT_MIN;
+	vector<TreeNode*> sortedArr;
 
-	int dfs(TreeNode* root) {
-		if (root == nullptr) {
-			return 0;
-		}
-
-		auto l = dfs(root->left);
-		auto r = dfs(root->right);
-
-		int x = max(l, 0);
-		int y = max(r, 0);
-
-		int temp_ans = (x + y) + (root->val);
-
-		ans = max(ans, temp_ans);
-
-		x += (root->val);
-		y += (root->val);
-
-		return max(x, y);
+	TreeNode* balanceBST(TreeNode* root) {
+		inorderTraverse(root);
+		return sortedArrayToBST(0, sortedArr.size() - 1);
 	}
 
-	int maxPathSum(TreeNode* root) {
+	void inorderTraverse(TreeNode* root) {
+		if (root == NULL) return;
+		inorderTraverse(root->left);
+		sortedArr.push_back(root);
+		inorderTraverse(root->right);
+	}
 
-		auto x = dfs(root);
+	TreeNode* sortedArrayToBST(int start, int end) {
+		if (start > end) return NULL;
 
-		return ans;
+		int mid = (start + end) / 2;
+
+		TreeNode* root = sortedArr[mid];
+
+		root->left = sortedArrayToBST(start, mid - 1);
+		root->right = sortedArrayToBST(mid + 1, end);
+
+		return root;
 	}
 };

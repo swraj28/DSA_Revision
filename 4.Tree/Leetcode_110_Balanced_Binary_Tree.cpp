@@ -26,29 +26,32 @@ struct TreeNode {
 class Solution {
 public:
 
-	bool ans = true;
+	int dfs(TreeNode* root) {
 
-	pair<int, int> dfs(TreeNode* root) {
 		if (root == nullptr) {
-			return {0, 0};
+			return 0;
 		}
 
 		auto l = dfs(root->left);
 		auto r = dfs(root->right);
 
-		int temp = abs(max(l.ff, l.ss) - max(r.ff, r.ss));
-
-		if (temp > 1) {
-			ans = false;
+		if (l == -1 || r == -1) {
+			return -1;
 		}
 
-		return {max(l.ff, l.ss) + 1 , max(r.ff, r.ss) + 1};
+		int temp = abs(l - r);
+
+		if (temp > 1) {
+			return -1;
+		}
+
+		return max(l, r) + 1;
 	}
 
 	bool isBalanced(TreeNode* root) {
 
 		auto x = dfs(root);
 
-		return ans;
+		return (x == -1) ? 0 : 1;
 	}
 };
