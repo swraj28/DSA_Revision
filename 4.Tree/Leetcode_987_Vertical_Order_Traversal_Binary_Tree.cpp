@@ -88,3 +88,46 @@ public:
 		return ans;
 	}
 };
+
+// dfs
+
+class Solution {
+public:
+
+	void recur(TreeNode* root, int angle, int level, map<int, map<int, set<int>>> &m) {
+		if (root == nullptr) {
+			return;
+		}
+
+		m[angle][level].insert(root->val);
+		recur(root->left, angle - 1, level + 1, m);
+		recur(root->right, angle + 1, level + 1, m);
+	}
+
+	vector<vector<int>> verticalTraversal(TreeNode* root) {
+
+		vector<vector<int> > ans;
+
+		if (root == nullptr) {
+			return ans;
+		}
+
+		map<int, map<int, multiset<int>>> m;
+
+		recur(root, 0, 0, m);
+
+		for (auto &m1 : m) {
+			vector<int> v;
+
+			for (auto &level : m1.ss) {
+				for (auto &val : level.ss) {
+					v.pb(val);
+				}
+			}
+
+			ans.pb(v);
+		}
+
+		return ans;
+	}
+};

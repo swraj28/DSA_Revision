@@ -31,6 +31,8 @@ struct TreeNode {
        The tree given in the question may not be perfect but at that particualr index we will store the null value.
 */
 
+// The approach is ok but the way we are indexing may cause overflow if we think of a very large skew tree not a balance binary tree.
+
 class Solution {
 public:
 	int widthOfBinaryTree(TreeNode* root) {
@@ -73,6 +75,61 @@ public:
 
 				if (node.ff->right) {
 					q.push({node.ff->right, ((2 * (ull) idx) + 1)});
+				}
+			}
+		}
+
+		return mx;
+	}
+};
+
+// We can avoid the overflow :- Smart Trick (Strvier Tree Series)
+
+class Solution {
+public:
+	int widthOfBinaryTree(TreeNode* root) {
+		if (root == nullptr) {
+			return 0;
+		}
+
+		if (root->left == nullptr and root->right == nullptr) {
+			return 1;
+		}
+
+		queue<pair<TreeNode*, ull>> q;
+
+		q.push({root, 0});
+
+		int mx = 0;
+
+		while (true) {
+
+			ull s = q.size();
+
+			if (s == 0) {
+				break;
+			}
+
+			ull mn = q.front().ss;
+
+			ull sze = (q.back().ss - q.front().ss) + 1;
+
+			mx = max(mx, (int)sze);
+
+			while (s--) {
+
+				auto node = q.front();
+				q.pop();
+
+				ull idx = node.ss;
+				idx -= mn;
+
+				if (node.ff->left) {
+					q.push({node.ff->left, (2 * (ull) idx) + 1});
+				}
+
+				if (node.ff->right) {
+					q.push({node.ff->right, ((2 * (ull) idx) + 2)});
 				}
 			}
 		}
