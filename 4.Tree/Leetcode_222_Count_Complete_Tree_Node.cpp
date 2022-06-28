@@ -34,9 +34,12 @@ struct TreeNode {
 // T.c:- (log(node))^2
 
 /*
-   Reason :-
+   Reason :- if we are given a complete tree then it will be balnaced.
+             now for every node that we are traversing we are find the left level and right level which will precisely take (log(ndoe)) time .
 
+             and the recursive function would have been called for the heigt of the tree times i.e, log(n) times
 
+             Therefore overall time complexity (log(node))^2
 */
 
 class Solution {
