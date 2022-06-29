@@ -38,16 +38,18 @@ public:
 		queue<TreeNode*> q;
 		q.push(root);
 
+		ans += to_string(root->val);
+		ans += ',';
+
 		while (!q.empty()) {
 
 			auto node = q.front();
 			q.pop();
 
-			ans += to_string(node->val);
-			ans += ',';
-
 			if (node->left) {
 				q.push(node->left);
+				ans += to_string(node->left->val);
+				ans += ',';
 			} else {
 				ans += "#";
 				ans += ',';
@@ -56,13 +58,15 @@ public:
 
 			if (node->right) {
 				q.push(node->right);
+				ans += to_string(node->right->val);
+				ans += ',';
 			} else {
 				ans += "#";
 				ans += ',';
 			}
 		}
 
-		cout << ans << endl;
+		// cout << ans << endl;
 
 		return ans;
 	}
@@ -103,6 +107,7 @@ public:
 			while (cnt < 2) {
 				if (data[idx] == ',') {
 					if (val == "#") {
+						cnt++;
 					} else {
 						if (cnt == 0) {
 							node->left = new TreeNode(stoi(val));

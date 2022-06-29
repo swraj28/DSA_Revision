@@ -13,6 +13,9 @@ public:
 
     // https://www.geeksforgeeks.org/find-paths-given-source-destination/
 
+    // The time complexity of this approach will lead to exponetial -->(v^v) --> where v is the number of vertices
+
+
     void dfs(vector<int> &visited, vector<int> &path, int src, int dest) {
 
         visited[src] = 1;

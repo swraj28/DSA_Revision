@@ -98,20 +98,18 @@ public:
 				curr = curr->right;
 			} else {
 
-				// Find the inorder successor of current.
 				TreeNode* succ = curr->left;
-				//To find the inorder successor keep going right till rightmost extreme node is not null or right node is not current.
+
 				while ((succ->right != nullptr) and (succ->right != curr)) {
 					succ = succ->right;
 				}
 
-				//if right node is null then go left after establishing link from predecessor to current.
 				if (succ->right == nullptr) {
 					succ->right = curr;
 					curr = curr->left;
 				} else { //This condition arises when the left subtree is entirely processed. (Remove the connection otherwise infinite loop will occur)
 					succ->right = nullptr;
-					res.pb(curr->val);
+					res.pb(curr->val);   // print the root node
 					curr = curr->right;
 				}
 			}

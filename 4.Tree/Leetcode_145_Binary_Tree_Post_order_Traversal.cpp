@@ -74,6 +74,7 @@ void post_order_itr_1(TreeNode*root) { //using 1 stack
 		}
 
 		TreeNode*temp = s.top()->right;
+
 		if (temp == NULL) {
 			temp = s.top();
 			cout << temp->val << " ";
