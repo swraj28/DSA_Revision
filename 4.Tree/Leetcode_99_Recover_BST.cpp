@@ -24,6 +24,9 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+// The brute force approach is to store the value of the tree in a vector and sorting it, making it the inorder traversal of tree. Now while doing the inordr
+// traversal match the values stored in the vector and on the tree node, if not matched then place the correct value on the tree node .
+
 // 1. Using Inorder Traversal (DFS):-
 
 /*
@@ -35,7 +38,7 @@ struct TreeNode {
 class Solution {
 public:
 
-	TreeNode* p1 = nullptr, *c1 = nullptr, *p2 = nullptr, *c2 = nullptr;
+	TreeNode* p1 = nullptr, *c1 = nullptr, *p2 = nullptr, *c2 = nullptr; // To understand about the pointers see the note on leetcode.
 
 	TreeNode* prev = nullptr;
 
