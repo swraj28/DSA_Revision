@@ -182,7 +182,7 @@ void print_max_sum_subarray(vector<int> &nums) {
 		if (nums[i] > (cur_max + nums[i])) {
 			cur_max = nums[i];
 			start_idx = i;
-		} else if (nums[i] < (cur_max + nums[i])) {
+		} else if (nums[i] <= (cur_max + nums[i])) {
 			cur_max = (cur_max + nums[i]);
 		}
 
