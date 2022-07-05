@@ -19,23 +19,26 @@ using namespace std;
      1. If (k==1)--> Then it is simply Kaden's Algorithm.
 
 
-     2. If (k>1 && sum<0)-->  Let us understand it by an example:- [a,b,c,d,e]--> array
+     2. If (k>1 && sum<0)-->  Let us understand it by an example:- [a,b,c,d,e,f]--> array
         so we write the enitre array :- [a,b,c,d,e,f,a,b,c,d,e,f,a,b,c,d,e,f,.........]--> k times
 
         One thing that can be proposed here that either the max sum is present in the non circular part of the array or if the maximum sum is present
         in the circular then only it will be present in two concatenation.
 
 
-        -->The max sum is present in the non-circular part of the array:-
+        -->The max sum is present in the circular part of the array:-
 
-        ---> let (d+e+f+a+b)-->yields max sum when two arrays are concatenated. Let 's' be the sum of the entire array.
-        --->     totak_sm= (d+e+f+a+b)+ (k-2)*(s).  As we know 's' is less than zero. Therefore taking extra element will be going to reduce the max sum.
+        ---> let (e+f+a+b)-->yields max sum when two arrays are concatenated. Let 's' be the sum of the entire array.
+        --->     totak_sm= (e+f+a+b)+ (k-2)*(s).  As we know 's' is less than zero. Therefore taking extra element will be going to reduce the max sum.
 
-        --> The max sum is present in the curcular part of the array :-
+        --> The max sum is present in the non curcular part of the array :-
 
         --->	let (a+b+c)-->yields max sum. Let 's' be the sum of the entire array.
         --->     totak_sm= (a+b+c)+ ((k-2)*(s))+(d+e+f).  As we know 's' is less than zero. T
         		herefore taking extra element will be going to reduce the max sum.
+
+
+        ---> Therefore the maximum sum will be determined by using only two conacatenation of the array .
 
 
      3. if(k>1 && sum>=0)---->Let us understand it by an example:- [a,b,c,d,e]--> array
@@ -43,7 +46,7 @@ using namespace std;
 
         Let s be the sum of the array :- s=(a+b+c+d+e+f) and (s>0).
 
-        One thing that can be propose that the maximum sum won't lie in the non- circular part. It will always lie in the circular part only.
+        One thing that can be proposed that the maximum sum won't lie in the non- circular part. It will always lie in the circular part only.
 
         we can prove this by contradiction:-
 
