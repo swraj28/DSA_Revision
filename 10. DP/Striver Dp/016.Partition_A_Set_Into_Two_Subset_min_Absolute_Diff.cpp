@@ -39,16 +39,16 @@ bool recur(vector<int> &nums, int n, int si, int sm, vector<vector<int>> &dp) {
 
 int minDifference(int arr[], int n)  {
 
-	vector<int> v;
+	vector<int> nums;
 
 	for (int i = 0; i < n; i++) {
-		v.push_back(arr[i]);
+		nums.push_back(arr[i]);
 	}
 
 	int sm = 0;
 
 	for (int i = 0; i < n; i++) {
-		sm += v[i];
+		sm += nums[i];
 	}
 
 	vector<vector<int>> dp(n + 1, vector<int>(sm + 1, -1));
@@ -56,7 +56,7 @@ int minDifference(int arr[], int n)  {
 	int mn = INT_MAX;
 
 	for (int i = 0; i <= sm / 2; i++) {
-		if (recur(v, n, 0, i, dp)) {
+		if (recur(nums, n, 0, i, dp)) {
 			int val = sm - i;
 			val = abs(val - i);
 			if (val < mn) {
@@ -66,4 +66,74 @@ int minDifference(int arr[], int n)  {
 	}
 
 	return mn;
+
+	//**********************************Iterative DP***********************************
+
+	vector<vector<bool>> dp(n + 1, vector<bool>(sm + 1, false));
+
+	for (int i = 0; i <= n; i++) {
+		dp[i][0] = true;
+	}
+
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= sm; j++) {
+
+			bool not_taken = dp[i - 1][j];
+
+			bool taken = false;
+
+			if (j >= nums[i - 1]) {
+				taken = dp[i - 1][j - nums[i - 1]];
+			}
+
+			dp[i][j] = (taken || not_taken);
+		}
+	}
+
+	int mini = 1e9;
+	for (int i = 0; i <= sm; i++) {
+		if (dp[n][i] == true) {
+			int diff = abs(i - (sm - i));
+			mini = min(mini, diff);
+		}
+	}
+
+	return mini;
+
+	//************************************* Space Optimized DP********************************
+
+	vector<bool> prev(sm + 1, false);
+	prev[0] = true;
+
+	for (int i = 1; i <= n; i++) {
+
+		vector<bool> curr(sm + 1, 0);
+		curr[0] = true;
+
+		for (int j = 1; j <= sm; j++) {
+
+			bool not_taken = prev[j];
+
+			bool taken = false;
+
+			if (j >= nums[i - 1]) {
+				taken = prev[j - nums[i - 1]];
+			}
+
+			curr[j] = (taken || not_taken);
+		}
+
+		prev = curr;
+	}
+
+	int mini = 1e9;
+
+	for (int i = 0; i <= sm; i++) {
+		if (prev[i] == true) {
+			int diff = abs(i - (sm - i));
+			mini = min(mini, diff);
+		}
+	}
+
+	return mini;
 }
