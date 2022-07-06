@@ -32,7 +32,7 @@ public:
 		}
 	}
 
-	void dfsHelper(T node, map<T, bool> &visited, list<T> &ordering) {
+	void dfsHelper(T node, map<T, bool> &visited, vector<T> &ordering) {
 
 		//Whenever to come to a node, mark it visited.
 		visited[node] = true;
@@ -45,7 +45,7 @@ public:
 			}
 		}
 
-		ordering.push_front(node);
+		ordering.push_back(node);
 
 		// for (auto node : ordering) {
 		// 	cout << node << endl;
@@ -57,7 +57,7 @@ public:
 	void dfs() {
 
 		map<T, bool> visited;
-		list<T> ordering;
+		vector<T> ordering;
 		//Mark all the nodes as not visited in the beginning
 		for (auto p : adjList) {
 			T node = p.first;
@@ -76,8 +76,6 @@ public:
 		}
 
 		//Print the list
-
-		reverse(ordering.begin(), ordering.end());
 
 		for (auto node : ordering) {
 			cout << node << endl;
