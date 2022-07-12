@@ -14,22 +14,7 @@ using namespace std;
 
 class Solution {
 public:
-	int lengthOfLIS(vector<int>& nums) {
+	int findDuplicate(vector<int>& nums) {
 
-		int n = nums.size();
-
-		vector<int> sub;
-
-		for (int i = 0; i < n; i++) {
-
-			if (sub.empty() || sub[sub.size() - 1] < nums[i]) {
-				sub.pb(nums[i]);
-			} else {
-				auto itr = lower_bound(all(sub), nums[i]);
-				*itr = nums[i];
-			}
-		}
-
-		return (int)sub.size();
 	}
 };
