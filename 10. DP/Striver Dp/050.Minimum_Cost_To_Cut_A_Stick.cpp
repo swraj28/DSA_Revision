@@ -16,7 +16,7 @@ class Solution {
 public:
 
 	int mcm(vector<int>& cuts, int st, int end, vector<vector<int>> &dp) {
-		if (end - st <= 1) { // You Cannot Cut a Stick of single length
+		if (end - st <= 1) {
 			return 0;
 		}
 
@@ -28,7 +28,7 @@ public:
 
 		for (int i = st + 1; i < end; i++) {
 
-			int rec_res = mcm(cuts, st, i, dp) + mcm(cuts, i + 1, end, dp) + (cuts[end] - cuts[st]);
+			int rec_res = mcm(cuts, st, i, dp) + mcm(cuts, i, end, dp) + (cuts[end] - cuts[st]);
 
 			mn = min(mn, rec_res);
 		}
@@ -49,25 +49,25 @@ public:
 
 		// return mcm(cuts, 0, n - 1, dp);
 
-		//**********************************Iterative DP Solution*************************************
+		//************************Iterative DP Solution***********************************
 
-		vector<vector<int>> dp(n, vector<int>(n, 0));
+		vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
 
 		for (int st = n - 1; st >= 0; st--) {
 			for (int end = st + 1; end < n; end++) {
 
-				int mn = INT_MAX;
+				int mn = (1e8);
 
-				for (int i = st + 1; i < end; i++) {
+				for (int k = st + 1; k < end; k++) {
 
-					if (end - st > 1) {
-						int rec_res = dp[st][i] + dp[i + 1][end] + (cuts[end] - cuts[st]);
+					int rec_res = dp[st][k] + dp[k][end] + (cuts[end] - cuts[st]);
 
-						mn = min(mn, rec_res);
-					}
+					mn = min(mn, rec_res);
 				}
 
-				dp[st][end] = mn;
+				if (mn < 1e8) {
+					dp[st][end] = mn;
+				}
 			}
 		}
 

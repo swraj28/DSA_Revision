@@ -26,7 +26,6 @@ public:
 
 		//most important stuff
 		//Init a Min Heap
-
 		priority_queue<pair<int, int>, vector<pair<int, int> > , greater<pair<int, int>>> Q;
 
 		//another array
