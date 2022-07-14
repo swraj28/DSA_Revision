@@ -33,10 +33,21 @@ public:
 		bool * vis = new bool[V] {0};
 		int ans = 0;
 
+		// To trace the path *******************
+
+		vector<int> Weight(V, INT_MAX);
+		vector<int> Parent(V, 0);
+
+		//*************************
+
 		//begin
 		Q.push({0, 0}); // weight, node
 
+		Parent[0] = -1;
+		Weight[0] = 0;
+
 		while (!Q.empty()) {
+
 			//pick out the edge with min weight
 			auto best = Q.top();
 			Q.pop();
@@ -55,11 +66,20 @@ public:
 
 			//add the new edges in the queue
 			for (auto x : l[to]) {
-				if (vis[x.first] == 0) {
+				if (vis[x.first] == 0 && x.second < Weight[x.first]) {
 					Q.push({x.second, x.first});
+					Parent[x.first] = to;
+					Weight[x.first] = x.second;
 				}
 			}
 		}
+
+		// To Trace Back The path and Weight of each edge in the path .
+
+		for (int i = 1; i < V; i++) {
+			cout << Parent[i] << "--" << i << "--" << Weight[i] << endl;
+		}
+
 		return ans;
 	}
 

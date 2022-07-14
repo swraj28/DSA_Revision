@@ -2,7 +2,6 @@
 using namespace std;
 
 /*
-
     Time Complexity: O(N^2). Going through N Node for N-1 times
 
 	Space Complexity: O(N). 3 arrays of size N
@@ -42,12 +41,13 @@ int main() {
 
 		int mini = INT_MAX, u;
 
-		for (int v = 0; v < N; v++)
-		{
+		for (int v = 0; v < N; v++) {
+
 			if (mstSet[v] == false && Weight[v] < mini) {
 				mini = Weight[v], u = v;
 			}
 		}
+
 		mstSet[u] = true;
 
 		for (auto it : adj[u]) {
@@ -66,5 +66,6 @@ int main() {
 	for (int i = 1; i < N; i++) {
 		cout << parent[i] << " - " << i << " \n";
 	}
+
 	return 0;
 }

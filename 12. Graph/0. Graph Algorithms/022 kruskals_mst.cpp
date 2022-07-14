@@ -59,9 +59,9 @@ struct Edge {
 
 	// Overloading the < operator
 
-	bool operator<(Edge const& other) {
-		return weight < other.weight;
-	}
+	// bool operator<(Edge const& other) {
+	// 	return weight < other.weight;
+	// }
 };
 
 int main() {
@@ -79,7 +79,9 @@ int main() {
 		edges.push_back({a, b, w});
 	}
 
-	sort(edges.begin(), edges.end()); // o(mlog(m))
+	sort(edges.begin(), edges.end(), [](Edge & a, Edge & b) {
+		return a.weight < b.weight;
+	}); // o(mlog(m))
 
 	// for (int i = 0; i < m; i++) {
 	// 	cout << edges[i].u << " " << edges[i].v << " " << edges[i].weight << endl;
