@@ -69,7 +69,7 @@ public:
 		vector<vector<int>> dp(n + 2, vector<int>(n + 2, 0));
 
 		for (int st = n - 1; st >= 0; st--) {
-			for (int end = 0; end < n; end++) {
+			for (int end = st; end < n; end++) {
 
 				int mx = INT_MIN;
 
@@ -85,7 +85,12 @@ public:
 						val *= nums[end + 1];
 					}
 
-					int rec_res_1 = dp[st][i - 1];
+					int rec_res_1 = 0;
+
+					if ((i - 1) >= 0) {
+						rec_res_1 = dp[st][i - 1];;
+					}
+
 					int rec_res_2 = dp[i + 1][end];
 
 					val += (rec_res_1 + rec_res_2);
