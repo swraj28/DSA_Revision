@@ -59,12 +59,12 @@ int main() {
 				parent[v] = u, Weight[v] = weight;
 			}
 		}
-
 	}
 
+	// To trase the path along its weight
 
 	for (int i = 1; i < N; i++) {
-		cout << parent[i] << " - " << i << " \n";
+		cout << parent[i] << " - " << i << "-" << Weight[i] << " \n";
 	}
 
 	return 0;

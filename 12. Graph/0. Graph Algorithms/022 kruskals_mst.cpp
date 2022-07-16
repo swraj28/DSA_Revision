@@ -56,12 +56,6 @@ void union_sets(int a, int b) {
 
 struct Edge {
 	int u, v, weight;
-
-	// Overloading the < operator
-
-	// bool operator<(Edge const& other) {
-	// 	return weight < other.weight;
-	// }
 };
 
 int main() {
@@ -82,10 +76,6 @@ int main() {
 	sort(edges.begin(), edges.end(), [](Edge & a, Edge & b) {
 		return a.weight < b.weight;
 	}); // o(mlog(m))
-
-	// for (int i = 0; i < m; i++) {
-	// 	cout << edges[i].u << " " << edges[i].v << " " << edges[i].weight << endl;
-	// }
 
 	int mn_cost = 0;
 

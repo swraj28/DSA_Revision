@@ -15,17 +15,13 @@ using namespace std;
 class Solution {
 public:
 
-	bool dp1[2005][2005] = {};
-
-	int dp[2005][2005];
-
-	int recur(string s, int st, int end) {  // This Function will return the minimum number of cut required
+	int recur(string s, int st, int end, vector<vector<bool>> &is_pailendrome, vector<vector<int>> &dp) { // This Function will return the minimum number of cut required
 
 		if (st == end) {
 			return 0;
 		}
 
-		if (dp1[st][end] == 1) { // If s[st..end] is a pailendrome
+		if (is_pailendrome[st][end] == 1) { // If s[st..end] is a pailendrome
 			return 0;
 		}
 
@@ -37,8 +33,8 @@ public:
 
 		for (int i = st; i < end; i++) {
 
-			if (dp1[st][i] == 1) {
-				int rec_res = 1 + recur(s, i + 1, end);
+			if (is_pailendrome[st][i] == 1) {
+				int rec_res = 1 + recur(s, i + 1, end, is_pailendrome, dp);
 				mn = min(mn, rec_res);
 			}
 		}
@@ -53,9 +49,11 @@ public:
 
 		//************ To check for Pailendrome***************************************************
 
+		vector<vector<bool>> is_pailendrome(n + 1, vector<bool>(n + 1, 0));
+
 
 		for (int i = 0; i < n; i++) { // A single character will always be a pailendrome (sz=1).
-			dp1[i][i] = 1;
+			is_pailendrome[i][i] = 1;
 		}
 
 		for (int sze = 2; sze <= n; sze++) {
@@ -66,11 +64,11 @@ public:
 
 				if (sze == 2) {
 					if (s[start] == s[end]) {
-						dp1[start][end] = 1;
+						is_pailendrome[start][end] = 1;
 					}
 				} else {
-					if ((s[start] == s[end]) and (dp1[start + 1][end - 1])) {
-						dp1[start][end] = 1;
+					if ((s[start] == s[end]) and (is_pailendrome[start + 1][end - 1])) {
+						is_pailendrome[start][end] = 1;
 					}
 				}
 			}
@@ -78,8 +76,33 @@ public:
 
 		//********************************************************************************************
 
-		ms(dp, -1);
+		// vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
 
-		return recur(s, 0, n - 1);
+		// return recur(s, 0, n - 1, is_pailendrome, dp);
+
+		//********************************Iterative DP Solution************************************
+
+		vector<int> dp(n + 1, 0);
+
+		for (int st = n - 1; st >= 0; st--) {
+
+			if (is_pailendrome[st][n - 1]) {
+				continue;
+			}
+
+			int mn = INT_MAX;
+
+			for (int i = st; i < n - 1; i++) {
+
+				if (is_pailendrome[st][i] == 1) {
+					int rec_res = 1 + dp[i + 1];
+					mn = min(mn, rec_res);
+				}
+			}
+
+			dp[st] = mn;
+		}
+
+		return dp[0];
 	}
 };

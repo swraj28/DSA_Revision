@@ -24,8 +24,6 @@ public:
 
 	int prim_mst() {
 
-		//most important stuff
-		//Init a Min Heap
 		priority_queue<pair<int, int>, vector<pair<int, int> > , greater<pair<int, int>>> Q;
 
 		//another array
@@ -56,7 +54,7 @@ public:
 			int weight = best.first;
 
 			if (vis[to]) {
-				//discard the edge, and continue
+				//discard the edge, and continue as it is already a part of MST.
 				continue;
 			}
 
