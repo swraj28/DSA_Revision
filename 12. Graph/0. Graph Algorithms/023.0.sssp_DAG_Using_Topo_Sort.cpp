@@ -33,8 +33,7 @@ void findTopoSort(int node, int vis[], stack<int> &st, vector<pair<int, int>> ad
 }
 
 
-void shortestPath(int src, int N, vector<pair<int, int>> adj[])
-{
+void shortestPath(int src, int N, vector<pair<int, int>> adj[]) {
 	int vis[N] = {0};
 	stack<int> st;
 	for (int i = 0; i < N; i++) {
