@@ -13,11 +13,10 @@ using namespace std;
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
 /*
-
     Let n be the length of the vector .
-
     worst case :- if the array is completly sorted then at every point we have 2 possiblities . T.c:- O(n*2^n).
 
+    Auxiliary Space:- O(n)--> Recursion Call Stack.
 */
 
 class Solution {
