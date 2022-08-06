@@ -42,6 +42,6 @@ public:
 			mn_sum = min(mn_sum, cur_min);
 		}
 
-		return (mx_sum > 0) ? max(mx_sum, (total - mn_sum)) : mx_sum;
+		return (mx_sum > 0) ? max(mx_sum, (total - mn_sum)) : mx_sum; // If all the element of the array is negative or zero then the maximum sum will be present in the non circular part .
 	}
 };
