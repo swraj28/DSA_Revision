@@ -42,7 +42,7 @@ public:
 		inOrder_rec(root->right);
 	}
 
-	// 2. Iterative Using an Explicit Stack:-
+	// 2. Iterative Using an Explicit Stack:- (Pretty similar to Binary search Tree Iterator)
 
 	/*
 	   T.c:- O(nodes)

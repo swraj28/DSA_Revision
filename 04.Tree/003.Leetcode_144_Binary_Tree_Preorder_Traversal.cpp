@@ -110,7 +110,7 @@ public:
 
 				if (pred->right == nullptr) {
 					pred->right = curr;
-					res.pb(curr->val);
+					res.pb(curr->val); // Shift this to the else part and it will become inorder morris traversal .
 					curr = curr->left;
 				} else {
 					pred->right = nullptr;

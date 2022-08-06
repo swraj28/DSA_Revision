@@ -39,6 +39,16 @@ struct TreeNode {
 
 */
 
+/*
+
+Complexity Analysis
+
+Time Complexity: O(N), where N is the number of nodes in the given tree.
+
+Space Complexity: O(H), where H is the height of the given tree.
+
+*/
+
 class Solution {
 public:
 
@@ -53,19 +63,19 @@ public:
 			return Covered;
 		}
 
-		if ((root->left == nullptr) and (root->right == nullptr)) {
+		if ((root->left == nullptr) && (root->right == nullptr)) {
 			return Need_Camera;
 		}
 
 		int l = dfs(root->left);
 		int r = dfs(root->right);
 
-		if (l == Need_Camera or r == Need_Camera) {
+		if (l == Need_Camera || r == Need_Camera) {
 			ans++;
 			return Has_Camera;
 		}
 
-		if (l == Has_Camera or r == Has_Camera) {
+		if (l == Has_Camera || r == Has_Camera) {
 			return Covered;
 		}
 
@@ -78,7 +88,7 @@ public:
 			return 0;
 		}
 
-		if ((root->left == nullptr) and (root->right == nullptr)) {
+		if ((root->left == nullptr) && (root->right == nullptr)) {
 			return 1;
 		}
 

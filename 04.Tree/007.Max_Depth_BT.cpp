@@ -12,7 +12,7 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-//Definition for a binary tree Node.
+//Definition for a binary tree node.
 
 struct TreeNode {
 	int val;
@@ -23,37 +23,16 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+// A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
 class Solution {
 public:
-
-	int dfs(TreeNode* root) {
+	int maxDepth(TreeNode* root) {
 
 		if (root == nullptr) {
 			return 0;
 		}
 
-		auto l = dfs(root->left);
-		auto r = dfs(root->right);
-
-		if (l == -1 || r == -1) {
-			return -1;
-		}
-
-		int temp = abs(l - r);
-
-		if (temp > 1) {
-			return -1;
-		}
-
-		return max(l, r) + 1;
-	}
-
-	bool isBalanced(TreeNode* root) {
-
-		auto x = dfs(root);
-
-		return (x == -1) ? 0 : 1;
+		return 1 + max({maxDepth(root->left), maxDepth(root->right)});
 	}
 };

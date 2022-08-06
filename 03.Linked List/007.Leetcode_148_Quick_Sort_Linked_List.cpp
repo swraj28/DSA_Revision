@@ -22,6 +22,23 @@ struct ListNode {
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/*
+
+    List of steps to be followed to perform Quick Sort on Linked List:-
+
+    1. We can choose any node to be the pivot node. Let's say in this question we have chosen middle element to be the pivot index.
+
+    --> The partion function returns three nodes {smaller,pivot,greater_eual}. smaller contains all the node lesser than pivot node, while
+        greater_eual contains all the nodes greater than or equal to the pivot node.
+
+    2.After that we simply call quick sort on the smaller and greater_equal part recursively and will return the {head , tail} of the sorted
+      left and right part.
+
+
+    3. After this we merge the {sorted left part, pivot node, sorted right part}.
+
+*/
+
 class Solution {
 public:
 	vector<ListNode*> Partition(ListNode* head, int pivotIdx) {

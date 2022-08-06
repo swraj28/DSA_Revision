@@ -31,34 +31,67 @@ public:
 		if (root == nullptr) {
 			return 0;
 		}
-
-		if (dp.find(root) != dp.end()) {
+		if (dp.count(root)) {
 			return dp[root];
 		}
 
-		int l = 0, r = 0;
+		int dontRob = rob(root -> left) + rob(root -> right);
 
-		// If i plan to rob the root node after that i cannot rob any value present in the left and right of the root node in the next level.
+		int robRoot = root -> val;
 
-		// Inclusion Exclusion Technique.
-
-		if (root->left) {
-			l += dfs(root->left->left);
-			l += dfs(root->left->right);
+		if (root -> left) {
+			robRoot += rob(root -> left -> left) + rob(root -> left -> right);
 		}
 
-		if (root->right) {
-			r += dfs(root->right->left);
-			r += dfs(root->right->right);
+		if (root -> right) {
+			robRoot += rob(root -> right -> left) + rob(root -> right -> right);
 		}
 
-		int sm = (root->val) + l + r;
-
-		return dp[root] = max({sm, (dfs(root->left) + dfs(root->right))});
+		return dp[root] = max(dontRob, robRoot);
 	}
 
 	int rob(TreeNode* root) {
 
 		return dfs(root);
+	}
+};
+
+// Space Optimized Dynamic programming :-
+
+/*
+   Approach:-
+
+The Thief cannot choose the two adjacent nodes right?
+
+Also, If we know the maximum amount the thief can steal for the child and grandchild nodes of the current node,
+we can answer the maximum amount for the current node also...Guess Why? [Think for the above condition].
+
+Since, If we choose the current node into our answer, we cannot take the child nodes of the current node right?
+Hence, we'd be looking for a maximum answer we can get with grandchild nodes.
+
+When we don't choose current node into our answer, we would look for a maximum answer for left as well as right child nodes.
+
+dp[node v] = max(root->val + dp[left grand child of v] + dp[right grand child of v] , dp[left child of v] + dp[right child of v] ) is the dp relation.
+
+we would maintain a pair<int, int> for every node {max ans child nodes, max ans for grandchild nodes} and recursively calculate the answer for every node.
+*/
+
+class Solution {
+public:
+
+	pair<int, int> dfs(TreeNode* root) {
+		if (root == nullptr) {
+			return {0, 0};
+		}
+
+		auto l = dfs(root->left);
+		auto r = dfs(root->right);
+
+		return {max({root->val + l.ss + r.ss, l.ff + r.ff}), l.ff + r.ff};
+	}
+
+	int rob(TreeNode* root) {
+
+		return dfs(root).ff;
 	}
 };

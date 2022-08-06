@@ -22,6 +22,18 @@ struct ListNode {
 	ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/*
+ Complexity Analysis
+
+Time complexity : O(Nlogk) where k is the number of linked lists and N be the number of nodes.
+We can merge two sorted linked list in O(n) time where n is the total number of nodes in two lists.
+
+Space complexity : O(1)
+
+We can merge two sorted linked lists in O(1) space.
+
+*/
+
 
 class Solution {
 public:
