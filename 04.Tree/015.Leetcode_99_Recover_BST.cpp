@@ -48,6 +48,7 @@ public:
 		}
 
 		dfs(root->left);
+
 		if (prev == nullptr) {
 			prev = root;
 		} else {
@@ -62,6 +63,7 @@ public:
 			}
 			prev = root;
 		}
+
 		dfs(root->right);
 	}
 
@@ -88,7 +90,71 @@ public:
 
 	void recoverTree(TreeNode* root) {
 
+		if (root == nullptr) {
+			return;
+		}
 
+		TreeNode* curr = root;
+
+		while (curr != nullptr) {
+
+			if (curr->left == nullptr) {
+				if (prev == nullptr) {
+					prev = curr;
+				} else {
+					if ((prev->val) > (curr->val)) {
+						if (p1 == nullptr) {
+							p1 = prev;
+							c1 = curr;
+						} else {
+							p2 = prev;
+							c2 = curr;
+						}
+					}
+					prev = curr;
+				}
+
+				curr = curr->right;
+			} else {
+
+				TreeNode* succ = curr->left;
+
+				while ((succ->right != nullptr) && (succ->right != curr)) {
+					succ = succ->right;
+				}
+
+				if (succ->right == curr) {
+
+					succ->right = nullptr;
+
+					if (prev == nullptr) {
+						prev = curr;
+					} else {
+						if ((prev->val) > (curr->val)) {
+							if (p1 == nullptr) {
+								p1 = prev;
+								c1 = curr;
+							} else {
+								p2 = prev;
+								c2 = curr;
+							}
+						}
+						prev = curr;
+					}
+
+					curr = curr->right;
+				} else {
+					succ->right = curr;
+					curr = curr->left;
+				}
+			}
+		}
+
+		if (p2 == nullptr) {
+			swap(p1->val, c1->val);
+		} else {
+			swap(p1->val, c2->val);
+		}
 	}
 };
 

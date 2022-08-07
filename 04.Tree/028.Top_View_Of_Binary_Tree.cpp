@@ -41,7 +41,7 @@ public:
 		queue<pair<Node*, int>> q;
 		q.push({root, 0});
 
-		map<int, vector<int>> m;
+		map<int, int> m;
 
 		while (true) {
 
@@ -58,7 +58,9 @@ public:
 				int val = p.first->data;
 				int angle = p.second;
 
-				m[angle].push_back(val);
+				if (m.count(angle) == 0) {
+					m[angle] = val;
+				}
 
 				if (p.first->left) {
 					q.push({p.first->left, (angle - 1)});
@@ -70,15 +72,8 @@ public:
 			}
 		}
 
-		int mn = INT_MAX, mx = INT_MIN;
-
-		for (auto i : m) {
-			mn = min(mn, i.first);
-			mx = max(mx, i.first);
-		}
-
-		for (int i = mn; i <= mx; i++) {
-			v.push_back(m[i][0]);
+		for (auto &it : m) {
+			v.pb(it.ss);
 		}
 	}
 

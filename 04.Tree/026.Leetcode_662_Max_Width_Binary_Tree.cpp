@@ -85,6 +85,8 @@ public:
 
 // We can avoid the overflow :- Smart Trick (Strvier Tree Series)
 
+
+
 class Solution {
 public:
 	int widthOfBinaryTree(TreeNode* root) {
@@ -122,7 +124,7 @@ public:
 				q.pop();
 
 				ull idx = node.ss;
-				idx -= mn;
+				idx -= mn; // We are subtracting mn to make it 0 based indexing .
 
 				if (node.ff->left) {
 					q.push({node.ff->left, (2 * (ull) idx) + 1});
