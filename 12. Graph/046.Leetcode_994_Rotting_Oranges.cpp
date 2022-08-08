@@ -29,7 +29,7 @@ public:
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
 				if (grid[i][j] == 2) {
-					q.push({i, j});
+					q.push({i, j}); // Multisource BFS.
 				}
 			}
 		}
