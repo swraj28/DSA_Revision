@@ -23,36 +23,50 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// The Brute Force Approach can be using the technique that we have used to find the lca for a binary tree. But since we are operating on a BST then we can optimze
-// our approach .
+// 2 DFS Calls:-
 
 class Solution {
 public:
 
-	TreeNode* lca_BST(TreeNode* root, TreeNode* p, TreeNode* q) {
+	int depth(TreeNode* root) {
+		if (root == nullptr) {
+			return 0;
+		}
+
+		return 1 + max(depth(root->left), depth(root->right));
+	}
+
+	TreeNode* lca(TreeNode* root, int d) {
 		if (root == nullptr) {
 			return nullptr;
 		}
 
-		if ((root->val >= p->val) && (root->val <= q->val)) {
+		if (d == 1) {
 			return root;
 		}
 
-		if ((root->val >= q->val) && (root->val <= p->val)) {
+		auto l = lca(root->left, d - 1);
+		auto r = lca(root->right, d - 1);
+
+		if (l && r) {
 			return root;
 		}
 
-		if ((root->val < p->val) && (root->val < q->val)) {
-			return lca_BST(root->right, p, q);
+		if (l) {
+			return l;
 		}
 
-		return lca_BST(root->left, p, q);
+		return r;
 	}
 
-	TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+	TreeNode* lcaDeepestLeaves(TreeNode* root) {
 
-		return lca_BST(root, p, q);
+		if (root->left == nullptr && root->right == nullptr) {
+			return root;
+		}
+
+		int d = depth(root);
+
+		return lca(root, d);
 	}
 };
-
-// Iterative Solution:-

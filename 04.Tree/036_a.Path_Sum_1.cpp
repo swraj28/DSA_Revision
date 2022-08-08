@@ -23,42 +23,25 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-/*
-    Recursive return [result, left, right], where:
-
-    result is the maximum length in the whole sub tree.
-	left is the maximum length in direction of (root.left)
-	right is the maximum length in direction of (root.right)
-
-
-	Complexity:-
-
-	Time O(N)
-	Space O(height)
-
-*/
-
-
 class Solution {
 public:
 
-	pair<int, pair<int, int>> dfs(TreeNode* root) {
+	bool dfs(TreeNode* root, int targetSum) {
 		if (root == nullptr) {
-			return { -1, { -1, -1}};
+			return false;
 		}
 
-		auto l = dfs(root->left);
-		auto r = dfs(root->right);
+		if ((root->left == nullptr) && (root->right == nullptr)) {
+			if (targetSum == (root->val)) {
+				return true;
+			}
+		}
 
-		int temp_ans = max({(l.ss.ss) + 1, (r.ss.ff) + 1});
-
-		temp_ans = max({l.ff, r.ff, temp_ans});
-
-		return {temp_ans, {(l.ss.ss) + 1, (r.ss.ff) + 1}};
+		return dfs(root->left, (targetSum - root->val)) || dfs(root->right, (targetSum - root->val));
 	}
 
-	int longestZigZag(TreeNode* root) {
+	bool hasPathSum(TreeNode* root, int targetSum) {
 
-		return dfs(root).ff;
+		return dfs(root, targetSum);
 	}
 };
