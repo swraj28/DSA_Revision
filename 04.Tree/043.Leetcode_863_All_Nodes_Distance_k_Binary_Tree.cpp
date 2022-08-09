@@ -114,7 +114,7 @@ struct TreeNode {
 // 	}
 // };
 
-// Most Intutive Approach :- Try to convert this tree into undirected graph without modifying the tree and then simply perform dfs that we do on graph .
+// Most Intutive Approach :- Try to convert this tree into directed graph without modifying the tree and then simply perform dfs that we do on graph .
 
 // 1.DFS:--
 

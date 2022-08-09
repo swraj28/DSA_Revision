@@ -23,30 +23,32 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Inorder Traversal of a BST is sorted in nature .
-
 class Solution {
 public:
-
-	void dfs(TreeNode* root, int &k, int &ans) {
-		if (root == nullptr) {
-			return;
+	TreeNode* searchBST(TreeNode* root, int val) {
+		if (root == NULL) {
+			return NULL;
 		}
 
-		dfs(root->left, k, ans);
-		k -= 1;
-		if (k == 0) {
-			ans = root->val;
-			return;
+		if (root->val == val) {
+			return root;
 		}
-		dfs(root->right, k, ans);
-	}
 
-	int kthSmallest(TreeNode* root, int k) {
+		TreeNode* n1 = NULL;
+		TreeNode* n2 = NULL;
 
-		int ans = -1;
-		dfs(root, k, ans);
+		if (val > root->val) {
+			n1 = searchBST(root->right, val);
+		} else {
+			n2 = searchBST(root->left, val);
+		}
 
-		return ans;
+		if (n1 != NULL) {
+			return n1;
+		} else if (n2 != NULL) {
+			return n2;
+		}
+
+		return NULL;
 	}
 };

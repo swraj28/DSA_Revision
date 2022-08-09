@@ -23,29 +23,39 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-// Inorder Traversal of a BST is sorted in nature .
-
 class Solution {
 public:
 
-	void dfs(TreeNode* root, int &k, int &ans) {
+	string dfs(TreeNode* root, unordered_map<string, int> &m, vector<TreeNode*> &ans) {
 		if (root == nullptr) {
-			return;
+			return "n";
 		}
 
-		dfs(root->left, k, ans);
-		k -= 1;
-		if (k == 0) {
-			ans = root->val;
-			return;
+		auto l = dfs(root->left, m, ans);
+		auto r = dfs(root->right, m, ans);
+
+		string s = to_string(root->val) + "->" + l + "->" + r;
+
+		m[s]++;
+
+		if (m[s] == 2) {
+			ans.pb(root);
 		}
-		dfs(root->right, k, ans);
+
+		return s;
 	}
 
-	int kthSmallest(TreeNode* root, int k) {
+	vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
 
-		int ans = -1;
-		dfs(root, k, ans);
+		if (root->left == nullptr && root->right == nullptr) {
+			return {};
+		}
+
+		vector<TreeNode*> ans;
+
+		unordered_map<string, int> m;
+
+		dfs(root, m, ans);
 
 		return ans;
 	}

@@ -25,37 +25,37 @@ struct TreeNode {
 
 // Approach:- Brute Force (Storing the inorder and then using the technique learned while solving the problem (Two Sum) on Leetcode).
 
-// class Solution {
-// public:
-// 	vector<int> v;
-// 	void Inorder(TreeNode* root) {
-// 		if (root == NULL) {
-// 			return;
-// 		}
+class Solution {
+public:
+	vector<int> v;
+	void Inorder(TreeNode* root) {
+		if (root == NULL) {
+			return;
+		}
 
-// 		Inorder(root->left);
-// 		v.push_back(root->val);
-// 		Inorder(root->right);
-// 	}
+		Inorder(root->left);
+		v.push_back(root->val);
+		Inorder(root->right);
+	}
 
-// 	bool findTarget(TreeNode* root, int k) {
+	bool findTarget(TreeNode* root, int k) {
 
-// 		Inorder(root);
-// 		int n = v.size();
-// 		int s = 0, e = n - 1;
-// 		while (s < e) {
-// 			if (v[s] + v[e] < k) {
-// 				s++;
-// 			} else if (v[s] + v[e] > k) {
-// 				e--;
-// 			} else {
-// 				return true;
-// 			}
-// 		}
+		Inorder(root);
+		int n = v.size();
+		int s = 0, e = n - 1;
+		while (s < e) {
+			if (v[s] + v[e] < k) {
+				s++;
+			} else if (v[s] + v[e] > k) {
+				e--;
+			} else {
+				return true;
+			}
+		}
 
-// 		return false;
-// 	}
-// };
+		return false;
+	}
+};
 
 // We cannot enhance the time complexity as in the worst case we need to iterate the element atleast once.
 

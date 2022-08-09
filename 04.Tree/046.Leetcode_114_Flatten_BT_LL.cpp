@@ -121,6 +121,7 @@ public:
 			if (!s.empty()) {
 				top->right = s.top();
 			}
+
 			top->left = nullptr;
 		}
 	}
