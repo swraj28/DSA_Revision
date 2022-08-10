@@ -26,7 +26,7 @@ public:
 		int median_pos_element = ((n + m) + 1) / 2;
 
 		// If the total number of elements are even then we need to pick one element from left partition and one element from right partition.
-		// If the total number of elements are odd tehn the median is present in the left partion itself.
+		// If the total number of elements are odd then the median is present in the left partion itself.
 
 		while (st <= end) {
 

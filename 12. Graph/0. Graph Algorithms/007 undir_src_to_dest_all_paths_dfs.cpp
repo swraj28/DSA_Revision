@@ -32,6 +32,7 @@ public:
         for (auto nbr : adj[src]) {
             if (!visited[nbr]) {
                 dfs(visited, path, nbr, dest);
+
                 //Backtracking
                 path.pop_back();
                 visited[nbr] = 0;
@@ -59,11 +60,13 @@ int main() {
     g.add_Edges(0, 1);
     g.add_Edges(1, 2);
     g.add_Edges(2, 3);
-    g.add_Edges(3, 4);
     g.add_Edges(0, 3);
+    g.add_Edges(3, 4);
     g.add_Edges(4, 5);
+    g.add_Edges(4, 6);
+    g.add_Edges(5, 6);
 
-    g.path(0, 5);
+    g.path(0, 6);
 
 
 

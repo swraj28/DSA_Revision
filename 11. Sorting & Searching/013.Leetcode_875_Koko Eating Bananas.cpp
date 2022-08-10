@@ -14,32 +14,34 @@ using namespace std;
 
 class Solution {
 public:
-	int kthSmallest(vector<vector<int>>& matrix, int k) {
+	int minEatingSpeed(vector<int>& piles, int h) {
 
-		int n = matrix.size();
+		int n = piles.size();
 
-		int st = matrix[0][0] - 1, end = matrix[n - 1][n - 1];
+		if (n == 1) {
+			return ceil(piles[0] / (h * (1.0)));
+		}
+
+		int st = 1, end = (int)(1e9);
 
 		while (st + 1 < end) {
 
-			int mid = (st + (end - st) / 2);
+			int mid = (st + (end - st) / 2);  // Per Hour Banana Eating speed of koko .
 
 			int cnt = 0;
 
 			for (int i = 0; i < n; i++) {
-
-				int idx = upper_bound(all(matrix[i]), mid) - matrix[i].begin();
-				cnt += idx;
+				cnt += ceil(piles[i] / (mid * (1.0)));
 			}
 
-			if (cnt >= k) {
+			if (cnt <= h) {
 				end = mid;
 			} else {
 				st = mid;
 			}
 		}
 
-		// cout << st << " " << end << endl;
+		// cout<<st<<" "<<end<<endl;
 
 		return end;
 	}
