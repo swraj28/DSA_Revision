@@ -19,6 +19,8 @@ public:
 
 		int mid = (st + (end - st) / 2);
 
+		/**********************************************************/
+
 		int total = 0;
 		int j = mid + 1;
 		for (int i = st; i <= mid; i++) {
@@ -32,6 +34,8 @@ public:
 
 
 		/***************************************************************/
+
+		// Merge Operation of Merge Sort
 
 		vector<int> temp((end - st) + 1);
 
