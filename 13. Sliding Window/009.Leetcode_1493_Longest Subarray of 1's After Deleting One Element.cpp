@@ -12,11 +12,28 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
-
 class Solution {
 public:
+	int longestSubarray(vector<int>& nums) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		int n = nums.size(), j = 0, mx = 0, cnt = 0;
+
+		for (int i = 0; i < n; i++) {
+			if (nums[i] == 0) {
+				cnt++;
+			}
+
+			while (cnt > 1) {
+				if (nums[j] == 0) {
+					cnt--;
+				}
+
+				j++;
+			}
+
+			mx = max(mx, (i - j) + 1);
+		}
+
+		return mx - 1;
 	}
 };

@@ -12,11 +12,37 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
-
 class Solution {
 public:
+	int longestKSubstr(string s, int k) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		int n = s.length(), j = 0, mx = 0;
+
+		int unique = 0;
+
+		vector<int> cnt(256, 0);
+
+		for (int i = 0; i < n; i++) {
+			if (cnt[s[i]] == 0) {
+				unique++;
+			}
+
+			cnt[s[i]]++;
+
+			while (unique > k) {
+				if (cnt[s[j]] == 1) {
+					unique--;
+				}
+
+				cnt[s[j]]--;
+				j++;
+			}
+
+			if (unique == k) {
+				mx = max(mx, (i - j) + 1);
+			}
+		}
+
+		return mx;
 	}
 };

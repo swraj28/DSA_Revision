@@ -12,11 +12,28 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
-
 class Solution {
 public:
+	int maxFrequency(vector<int>& nums, int k) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		sort(all(nums));
+
+		ll n = nums.size(), j = 0, sum = 0;
+
+		ll mx = 1;
+
+		for (ll i = 0; i < n; i++) {
+
+			sum += (ll)nums[i];
+
+			while ((i - j + 1)*nums[i] - sum > k) {
+				sum -= nums[j];
+				j++;
+			}
+
+			mx = max(mx, (i - j) + 1);
+		}
+
+		return mx;
 	}
 };

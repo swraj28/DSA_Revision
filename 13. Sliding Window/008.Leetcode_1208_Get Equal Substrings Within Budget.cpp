@@ -12,11 +12,26 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
-
 class Solution {
 public:
+	int equalSubstring(string s, string t, int maxCost) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		int n = s.length(), j = 0, cost = 0;
+
+		int mx = 0;
+
+		for (int i = 0; i < n; i++) {
+
+			cost += abs(s[i] - t[i]);
+
+			while (cost > maxCost) {
+				cost -= abs(s[j] - t[j]);
+				j++;
+			}
+
+			mx = max(mx, (i - j) + 1);
+		}
+
+		return mx;
 	}
 };

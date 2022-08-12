@@ -12,11 +12,34 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
-
 class Solution {
 public:
+	int numSubarrayProductLessThanK(vector<int>& nums, int k) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		if (k == 0) {
+			return 0;
+		}
+
+		int n = nums.size();
+
+		int st = 0;
+
+		int ans = 1;
+
+		int total = 0;
+
+		for (int i = 0; i < n; i++) {
+
+			ans *= nums[i];
+
+			while (ans >= k && st <= i) { // [1,1,1] 1
+				ans /= nums[st];
+				st++;
+			}
+
+			total += (i - st) + 1;
+		}
+
+		return total;
 	}
 };

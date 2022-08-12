@@ -12,11 +12,33 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define ms(arr, v) memset(arr, v, sizeof(arr))
 
-// Watch Tech Dose Videos for Analysing the Time Complexity:-
+
 
 class Solution {
 public:
+	int longestOnes(vector<int>& nums, int k) {
 
-	vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+		int n = nums.size(), j = 0, cnt = 0;
+
+		int mx = 0;
+
+		for (int i = 0; i < n; i++) {
+
+			if (nums[i] == 0) {
+				cnt++;
+			}
+
+			while (cnt > k) {
+				if (nums[j] == 0) {
+					cnt--;
+				}
+
+				j++;
+			}
+
+			mx = max(mx, (i - j) + 1);
+		}
+
+		return mx;
 	}
 };
