@@ -85,64 +85,67 @@ public:
 
 // BFS:-
 
-struct s {
-
-	int x = 0, y = 0, len = 0, k_left = 0;
-};
-
-int dx[4] = { -1, 1, 0, 0}, dy[4] = {0, 0, -1, 1};
-
 class Solution {
 public:
-	int shortestPath(vector<vector<int>>& grid, int k) {
+	int solve(vector<vector<int>>& grid, int k) {
 
-		int n = grid.size(), m = grid[0].size();
+		// At a particular cell we will store the number of obstacles that we can still remove after walking through that cell
+		vector<vector<int>> vis(grid.size(), vector<int>(grid[0].size(), -1));
 
-		vector<vector<int>> visited(n, vector<int>(m, 0));  // Wrong :- Handle Visited Bit Smartly (Approach is fine)
+		queue<vector<int>> q;
 
-		queue<s> q;
-
+		// queue stores (x,y,current path length,number of obstacles we can still remove)
 		q.push({0, 0, 0, k});
-
-		visited[0][0] = 1;
 
 		while (!q.empty()) {
 
-			auto node = q.front();
+			auto t = q.front();
+
+			int x = t[0], y = t[1];
+
 			q.pop();
 
-			int x = node.x, y = node.y, len = node.len, k_left = node.k_left;
-
-			if ((x == n - 1) && (y == m - 1)) {
-				return len;
+			// Exit if current position is outside of the grid
+			if (x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size()) {
+				continue;
 			}
 
-			for (int i = 0; i < 4; i++) {
-				int new_x = x + dx[i], new_y = y + dy[i];
+			// Destination found
+			if (x == grid.size() - 1 && y == grid[0].size() - 1) {
+				return t[2];
+			}
 
-				if (new_x < 0 || new_x >= n || new_y < 0 || new_y >= m) {
+			if (grid[x][y] == 1) {
+				if (t[3] > 0) {// If we encounter an obstacle and we can remove it
+					t[3]--;
+				} else {
 					continue;
 				}
-
-				if (!visited[new_x][new_y]) {
-
-					if (grid[new_x][new_y] == 1 && k_left == 0) {
-						continue;
-					}
-
-					if (grid[new_x][new_y] == 0) {
-						visited[new_x][new_y] = 1;
-
-						q.push({new_x, new_y, len + 1, k_left});
-					} else {
-						visited[new_x][new_y] = 1;
-
-						q.push({new_x, new_y, len + 1, k_left - 1});
-					}
-				}
 			}
-		}
 
+			/*
+			   vis[x][y] tells how many more obstacles we can remove if we continue on the current path.
+			   So if vis[x][y]>="current obstacle removing capacity" then it means that the cell [x][y] was previously visited by some path
+			   whose removing capacity was greater after passing through this cell.
+			   So we don't need to continue on this path since it has already been visited by some other more optimal path.
+			*/
+
+			if (vis[x][y] != -1 && vis[x][y] >= t[3]) {  // Euqual to ??
+				continue;
+			}
+
+			vis[x][y] = t[3];
+
+			q.push({x + 1, y, t[2] + 1, t[3]});
+			q.push({x, y + 1, t[2] + 1, t[3]});
+			q.push({x - 1, y, t[2] + 1, t[3]});
+			q.push({x, y - 1, t[2] + 1, t[3]});
+
+		}
 		return -1;
+	}
+
+	int shortestPath(vector<vector<int>>& grid, int k) {
+		return solve(grid, k);
 	}
 };

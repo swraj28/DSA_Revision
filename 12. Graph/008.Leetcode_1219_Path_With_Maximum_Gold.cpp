@@ -39,6 +39,8 @@ public:
             dfs(x + dx[i], y + dy[i], n, m, grid, visited, sm);
         }
 
+        // Backtracking:-
+
         visited[x][y] = 0;
         sm -= grid[x][y];
     }

@@ -15,7 +15,7 @@ using namespace std;
 class Solution {
 public:
 
-	bool dfs(int src, vector<int> gr[], vector<int> &visited, vector<int> &stack) {
+	bool dfs(int src, vector<int> gr[], vector<int> &visited, vector<int> &stack) {  // Cycle Detection in Directed Graph.
 		visited[src] = 1;
 		stack[src] = 1;
 

@@ -17,7 +17,7 @@ public:
 
 	// Cycle Detection in a Directed Graph:-
 
-	bool contain_cycle(int src, map<int, set<int>> &adj, vector<int> &visited1, vector<int> &stack) {
+	bool contain_cycle(int src, map<int, set<int>> &adj, vector<int> &visited1, vector<int> &stack) {  // Cycle Detection in Directed Graph
 		visited1[src] = 1;
 		stack[src] = 1;
 
@@ -39,17 +39,17 @@ public:
 
 	// Topological Sorting Using DFS:-
 
-	void dfs(int src, map<int, set<int>> &adj, vector<int> &visited, list<int> &l) {
+	void dfs(int src, map<int, set<int>> &adj, vector<int> &visited, vector<int> &ans) {
 
 		visited[src] = 1;
 
 		for (auto nbr : adj[src]) {
 			if (!visited[nbr]) {
-				dfs(nbr, adj, visited, l);
+				dfs(nbr, adj, visited, ans);
 			}
 		}
 
-		l.push_front(src);
+		ans.pb(src);
 	}
 
 	vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
@@ -90,17 +90,10 @@ public:
 
 		vector<int> visited(n, 0);
 
-		list<int> l;
-
 		for (int i = 0; i < n; i++) {
 			if (!visited[i]) {
-				dfs(i, adj, visited, l);
+				dfs(i, adj, visited, res);
 			}
-		}
-		reverse(all(l));
-
-		for (auto ele : l) {
-			res.pb(ele);
 		}
 
 		return res;
