@@ -46,6 +46,8 @@ public:
 			return 0;
 		}
 
+		// Make dfs from first row, last row, first column ,last column .
+
 		for (int j = 0; j < m; j++) {
 			if (grid[0][j]) {
 				dfs(0, j, n, m, grid);

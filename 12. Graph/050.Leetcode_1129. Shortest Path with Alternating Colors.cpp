@@ -15,89 +15,53 @@ using namespace std;
 class Solution {
 public:
 
-	pair<bool, int> bfs(int n, int src, int dest, int cur, vector<int> red[], vector<int> blue[]) {
-
-		queue<int> q;
-		q.push(src);
-
-		vector<int> visited_red(n, 0);
-		vector<int> visited_blue(n, 0);
-
-		int dist = 0;
-
-		visited_blue[0] = 1;
-		visited_red[0] = 1;
-
-		while (!q.empty()) {
-
-			int sze = q.size();
-
-			while (sze--) {
-
-				auto node = q.front();
-				q.pop();
-
-				if (node == dest) {
-					return {true, dist};
-				}
-
-				if (cur == 0) {
-					for (auto &nbr : red[node]) {
-						if (!visited_red[nbr]) {
-							visited_red[nbr] = 1;
-							q.push(nbr);
-						}
-					}
-				} else {
-					for (auto &nbr : blue[node]) {
-						if (!visited_blue[nbr]) {
-							visited_blue[nbr] = 1;
-							q.push(nbr);
-						}
-					}
-				}
-			}
-
-			dist++;
-			cur ^= 1;
-		}
-
-		return {false, INT_MAX};
-	}
-
 	vector<int> shortestAlternatingPaths(int n, vector<vector<int>>& redEdges, vector<vector<int>>& blueEdges) {
 
-		vector<int> red[n];
-		vector<int> blue[n];
+		// 0--> Red Edge
+		// 1--> Blue Edge.
+
+		vector<pair<int, int>> gr[n];
 
 		for (auto &e : redEdges) {
-			if (e[0] == e[1])continue;
-			red[e[0]].pb(e[1]);
+			gr[e[0]].pb({e[1], 0});
 		}
 
 		for (auto &e : blueEdges) {
-			if (e[0] == e[1])continue;
-			blue[e[0]].pb(e[1]);
+			gr[e[0]].pb({e[1], 1});
 		}
 
-		vector<int> ans(n);
+		vector<vector<int>> dist(n, vector<int>(2, -1));
 
+		dist[0][0] = 0, dist[0][1] = 0;
+
+		queue<pair<int, int>> q;
+
+		q.push({0, 0}); // we arrived at 0 from some imaginary node using red edge .
+		q.push({0, 1}); // we arrived at 0 from some imaginary node using blue edge.
+
+		while (!q.empty()) {
+
+			auto node = q.front();
+			q.pop();
+
+			for (auto &nbr : gr[node.ff]) {
+
+				if (dist[nbr.ff][nbr.ss] != -1 || nbr.ss == node.ss) {
+					// either visited or same color
+					continue;
+				}
+
+				dist[nbr.ff][nbr.ss] = 1 + dist[node.ff][node.ss];
+				q.push({nbr.ff, nbr.ss}); // Basically in the queue we are storing that at the paritcular node what color edge did we take to arrive from the previou node .
+			}
+		}
+
+		vector<int> ans(n, 0);
 
 		for (int i = 1; i < n; i++) {
+			sort(all(dist[i]));
 
-			int src = 0, dest = i;
-
-			// curr=0--> red edge required
-			// curr=1--> blue edge required
-
-			pair<bool, int> p1 = bfs(n, src, dest, 0, red, blue);
-			pair<bool, int> p2 = bfs(n, src, dest, 1, red, blue);
-
-			if (p1.ff || p2.ff) {
-				ans[i] = min(p1.ss, p2.ss);
-			} else {
-				ans[i] = -1;
-			}
+			ans[i] = (dist[i][0] == -1) ? dist[i][1] : dist[i][0];
 		}
 
 		return ans;

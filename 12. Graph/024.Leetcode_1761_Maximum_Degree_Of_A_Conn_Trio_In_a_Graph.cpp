@@ -33,6 +33,8 @@ public:
 			v[y][x] = 1;
 		}
 
+		// If there are E number of edges then total degree associalted will be (2*E)
+
 		int ans = INT_MAX;
 
 		for (int i = 1; i <= n; i++) {

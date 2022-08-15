@@ -130,7 +130,7 @@ public:
 			}
 		}
 
-		if (total_a > 1 or total_b > 1) {
+		if (total_a > 1 or total_b > 1) {  // we are unable to create (n-1) edges
 			return -1;
 		}
 

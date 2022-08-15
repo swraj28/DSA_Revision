@@ -20,7 +20,7 @@ public:
 	void dfs(vector<vector<int>>& grid, vector<vector<int>> &visited, int i, int j, int pre_x, int pre_y, int n, int m, int c1, int color) {
 
 		if (i<0 or i >= n or j<0 or j >= m) {
-			grid[pre_x][pre_y] = color;
+			grid[pre_x][pre_y] = color;  // Coloring the Border.
 			return;
 		}
 
@@ -29,7 +29,7 @@ public:
 		}
 
 		if (grid[i][j] != c1) {
-			grid[pre_x][pre_y] = color;
+			grid[pre_x][pre_y] = color; // Coloring the Border.
 			return;
 		}
 
