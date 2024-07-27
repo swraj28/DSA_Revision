@@ -62,17 +62,6 @@ ll mod_sub(ll a, ll b, ll m) {a = a % m; b = b % m; return (((a - b) % m) + m) %
 ll mod_div(ll a, ll b, ll m) {a = a % m; b = b % m; return (mod_mul(a, mminvprime(b, m), m) + m) % m;}  //only for prime m
 /*--------------------------------------------------------------------------------------------*/
 
-//Definition for a binary tree node.
-
-struct TreeNode {
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode() : val(0), left(nullptr), right(nullptr) {}
-	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
-
 class node {
 public:
 	char ch;
@@ -89,7 +78,7 @@ class Trie {
 	node* root;
 public:
 	Trie() {
-		root = new node('\0');
+		root = new node('\0');  // Initializing a Trie with a Null Character ... 
 	}
 
 	void insert(string word) {
