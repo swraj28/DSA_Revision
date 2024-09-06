@@ -5,9 +5,6 @@ import java.util.List;
 
 /**
  * Program description - To find all possible paths from source to destination
- * <a href="https://en.wikipedia.org/wiki/Shortest_path_problem">Wikipedia</a>
- *
- * @author <a href="https://github.com/siddhant2002">Siddhant Swarup Mallick</a>
  */
 public class AllPathsFromSourceToTarget {
 
@@ -96,5 +93,14 @@ public class AllPathsFromSourceToTarget {
         // method call to store all possible paths
         return nm;
         // returns all possible paths from source to destination
+    }
+
+    public static  void main (String []args){
+        int vertices = 4;
+        int[][] a = {{0, 1}, {0, 2}, {0, 3}, {1, 3}, {2, 3}};
+        int source = 0;
+        int destination = 3;
+        List<List<Integer>> result = allPathsFromSourceToTarget(vertices, a, source, destination);
+        System.out.println(result);
     }
 }
