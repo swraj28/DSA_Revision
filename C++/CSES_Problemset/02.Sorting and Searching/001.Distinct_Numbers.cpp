@@ -1,21 +1,49 @@
-#include<bits/stdc++.h>
+#include    <iostream>
+#include    <string>
+#include    <algorithm>
+#include    <map>
+#include    <unordered_map>
+#include    <vector>
+#include    <set>
+#include    <list>
+#include    <iomanip>
+#include    <queue>
+#include    <stack>
+#include    <math.h>
+#include    <climits>
+#include    <bitset>
+#include    <cstring>
+#include    <numeric>
+#include    <array>
+#include    <deque>
+#include    <cstdlib>
+#include    <cstdio>
+#include    <stdlib.h>
+#include    <cerrno>
+#include    <ctime>
+#include    <unordered_set>
+#include    <cstring>
+#include    <cmath>
+#include    <random>
+#include    <functional>
+#include    <cassert>
+#include    <bitset>
+#include    <chrono>
+ 
+ 
 using namespace std;
 #define ll long long
 #define ull unsigned long long
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
+#define lld long double
 #define ff first
 #define ss second
 #define pb push_back
 #define mp make_pair
+#define pii pair<int,int>
 #define PI 3.1415926535897932384626
 #define mod 1000000007
 #define mod1 998244353
 #define ms(arr, v) memset(arr, v, sizeof(arr))
-#define deb(x) cout<<x<<"\n";
-#define deB(x,y) cout<<x<<" "<<y<<"\n";
-#define Deb(x,y,z) cout<<x<<" "<<y<<" "<<z<<"\n"
 #define YES cout<<"YES\n";
 #define Yes cout<<"Yes\n";
 #define NO cout<<"NO\n";
@@ -23,11 +51,7 @@ using namespace __gnu_pbds;
 #define bct(x) __builtin_popcountll(x)
 #define all(v) (v).begin(),(v).end()
 #define mk(arr,n,type)  type *arr=new type[n];
-template <typename T>
-using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-// cout << s.order_of_key(2) << endl; // the number of elements in the s less than 2
-// cout << *s.find_by_order(0) << endl; // print the 0-th smallest number in s(0-based)
 
 /*-------------------------------------------------------------------------------------------*/
 ll gcd(ll a, ll b) {if (b > a) {return gcd(b, a);} if (b == 0) {return a;} return gcd(b, a % b);}
